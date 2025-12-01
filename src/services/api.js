@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL;;
 
 export const fetchUsers = async () => {
   const response = await fetch(`${API_BASE_URL}/users`);

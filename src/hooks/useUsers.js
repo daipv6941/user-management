@@ -27,5 +27,15 @@ export const useUsers = () => {
     loadUsers();
   };
 
-  return { users, isLoading, error, retry };
+  const deleteUser = (userId) => {
+    setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+  };
+
+  return { 
+    users, 
+    isLoading, 
+    error, 
+    retry,
+    deleteUser // Export function mới
+  };
 };

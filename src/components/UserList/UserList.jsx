@@ -4,7 +4,13 @@ import UserDetails from '../UserDetails/UserDetails';
 import PostList from '../PostList/PostList';
 import './UserList.css';
 
-const UserList = ({ users, userPosts, loadingPosts, onLoadPosts }) => {
+const UserList = ({ 
+  users, 
+  userPosts, 
+  loadingPosts, 
+  onLoadPosts,
+  onDeleteUser
+}) => {
   const [expandedUserId, setExpandedUserId] = useState(null);
 
   const handleToggle = (userId) => {
@@ -14,6 +20,13 @@ const UserList = ({ users, userPosts, loadingPosts, onLoadPosts }) => {
       setExpandedUserId(userId);
       onLoadPosts(userId);
     }
+  };
+
+  const handleDelete = (userId) => {
+    if (expandedUserId === userId) {
+      setExpandedUserId(null); // Close details if deleting expanded user
+    }
+    onDeleteUser(userId);
   };
 
   if (users.length === 0) {
@@ -33,6 +46,7 @@ const UserList = ({ users, userPosts, loadingPosts, onLoadPosts }) => {
             user={user}
             isExpanded={expandedUserId === user.id}
             onToggle={() => handleToggle(user.id)}
+            onDelete={handleDelete}
           />
           
           {expandedUserId === user.id && (
